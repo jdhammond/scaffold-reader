@@ -21,12 +21,14 @@ function App() {
 
   return (
     <>
-      <StudentSelector
-        students={students}
-        activeStudent={activeStudent}
-        onStudentChange={setActiveStudent}
-      />
-      <h1>{passage.title}</h1>
+      <header className='passage-header'>
+        <h1>{passage.title}</h1>
+        <StudentSelector
+          students={students}
+          activeStudent={activeStudent}
+          onStudentChange={setActiveStudent}
+        />
+      </header>
       <p className='passage'>
         {segments.map((segment, i) => (
           <TextSegment key={i} {...segment} />

@@ -1,3 +1,4 @@
+import './StudentSelector.css';
 import type { Student } from './types';
 
 type StudentSelectorProps = {
@@ -17,8 +18,8 @@ export function StudentSelector({
   };
 
   return (
-    <>
-      <label htmlFor='student-select'>Student: </label>
+    <div className='student-selector'>
+      <label htmlFor='student-select'>Student</label>
       <select
         id='student-select'
         value={activeStudent.id}
@@ -30,6 +31,6 @@ export function StudentSelector({
           </option>
         ))}
       </select>
-    </>
+    </div>
   );
 }
