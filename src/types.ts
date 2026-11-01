@@ -10,6 +10,7 @@ export type TextSegmentProps = {
   annotation?: string;
   // BCP 47 tag for translated annotations, so screen readers use the right voice
   lang?: string;
+  scaffoldType?: string;
 };
 
 export type AnchorIndices = { start: number; end: number };

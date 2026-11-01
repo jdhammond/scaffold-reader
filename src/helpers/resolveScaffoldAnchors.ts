@@ -13,7 +13,6 @@ export function resolveScaffoldAnchors(
     // Annotate the first instance.
     const start = passageText.indexOf(quote);
     if (start === -1) {
-      // TODO: stub a logging utility if time permits
       console.warn(
         `Scaffold ${scaffold.id}: quote "${quote}" not found in passage`,
       );

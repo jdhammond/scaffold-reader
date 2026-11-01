@@ -15,7 +15,7 @@ describe('segmentPassage', () => {
     });
     expect(segmentPassage([scaffold], passage)).toEqual([
       { text: 'The ' },
-      { text: 'quick', annotation: 'fast' },
+      { text: 'quick', annotation: 'fast', scaffoldType: 'glossary' },
       { text: ' brown fox.' },
     ]);
   });
@@ -25,6 +25,7 @@ describe('segmentPassage', () => {
     expect(segmentPassage([scaffold], passage)).toContainEqual({
       text: 'brown',
       annotation: 'marrón',
+      scaffoldType: 'glossary',
     });
   });
 
@@ -38,6 +39,7 @@ describe('segmentPassage', () => {
       text: 'brown',
       annotation: 'marrón',
       lang: 'es',
+      scaffoldType: 'translation',
     });
   });
 
@@ -63,7 +65,7 @@ describe('segmentPassage', () => {
       passage,
     );
     expect(segments.filter((s) => s.annotation)).toEqual([
-      { text: 'brown fox', annotation: 'winner' },
+      { text: 'brown fox', annotation: 'winner', scaffoldType: 'glossary' },
     ]);
   });
 });
