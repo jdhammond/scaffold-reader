@@ -11,7 +11,7 @@ export function matchStudentLanguage(
   language: string,
   scaffold: Scaffold,
 ): boolean {
-  // Non-translation scaffolds shouldn't rejected on the basis of language
+  // Non-translation scaffolds shouldn't be rejected on the basis of language
   if (!scaffold.language) return true;
 
   if (language.toLowerCase() in languageToAbbreviationsMap) {

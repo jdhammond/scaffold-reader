@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getStudentScaffolds } from './getStudentScaffolds';
+import { getStudentScaffolds, MIN_CONFIDENCE } from './getStudentScaffolds';
 import { makeScaffold } from '../test/makeScaffold';
 import type { Student } from '../types';
 
@@ -39,5 +39,14 @@ describe('getStudentScaffolds', () => {
 
   it('returns nothing when no scaffold covers the level', () => {
     expect(idsFor(student({ level: 7 }))).toEqual([]);
+  });
+
+  it('drops scaffolds below the minimum confidence', () => {
+    const lowConfidence = [
+      makeScaffold({ id: 'below', confidence: MIN_CONFIDENCE - 0.01 }),
+      makeScaffold({ id: 'at', confidence: MIN_CONFIDENCE }),
+    ];
+    const ids = getStudentScaffolds(student({}), lowConfidence).map((s) => s.id);
+    expect(ids).toEqual(['at']);
   });
 });
