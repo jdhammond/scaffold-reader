@@ -20,6 +20,7 @@ export type Scaffold = {
   type: string; // TODO: tighten up types here if possible
   anchor: AnchorIndices | AnchorQuote;
   content: DefinitionContent | TextContent;
+  language?: string;
   level_range: number[];
   confidence: number;
 };
