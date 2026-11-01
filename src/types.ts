@@ -4,3 +4,8 @@ export type Student = {
   home_language: string;
   level: string | number;
 };
+
+export type TextSegmentProps = {
+  text: string;
+  annotation?: string;
+};

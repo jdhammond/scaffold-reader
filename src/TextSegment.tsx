@@ -1,9 +1,5 @@
-import './Segment.css';
-
-export type TextSegmentProps = {
-  text: string;
-  annotation?: string;
-};
+import './TextSegment.css';
+import type { TextSegmentProps } from './types';
 
 export function TextSegment({ text, annotation }: TextSegmentProps) {
   if (!annotation) return <span>{text}</span>;

@@ -1,15 +1,18 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import { resolveScaffolds } from './helpers/resolveScaffolds';
 
 import data from '../data-source/scaffold-reader-data.json';
 import { StudentSelector } from './StudentSelector';
 import type { Student } from './types';
-import { TextSegment } from './Segment';
+import { TextSegment } from './TextSegment';
 
 function App() {
-  const { passage, students } = data;
+  const { passage, students, scaffolds } = data;
 
   const [activeStudent, setActiveStudent] = useState<Student>(students[0]);
+
+  const segments = useMemo(() => resolveScaffolds(scaffolds), [activeStudent]);
 
   return (
     <>
@@ -19,7 +22,11 @@ function App() {
         onStudentChange={setActiveStudent}
       />
       <h1>{passage.title}</h1>
-      <TextSegment text={passage.text} annotation='test tooltip for now' />
+      <p className='passage'>
+        {segments.map((segment, i) => (
+          <TextSegment key={i} {...segment} />
+        ))}
+      </p>
     </>
   );
 }
