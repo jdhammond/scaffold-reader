@@ -20,7 +20,7 @@ export type TextContent = { text: string };
 
 export type Scaffold = {
   id: string;
-  type: string; // TODO: tighten up types here if possible
+  type: string;
   anchor: AnchorIndices | AnchorQuote;
   content: DefinitionContent | TextContent;
   language?: string;
