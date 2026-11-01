@@ -8,6 +8,8 @@ export type Student = {
 export type TextSegmentProps = {
   text: string;
   annotation?: string;
+  // BCP 47 tag for translated annotations, so screen readers use the right voice
+  lang?: string;
 };
 
 export type AnchorIndices = { start: number; end: number };

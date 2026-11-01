@@ -18,7 +18,7 @@ export function segmentPassage(
   const segments: TextSegmentProps[] = [];
   let cursor = 0;
 
-  for (const { anchor, content } of resolveOverlaps(anchored)) {
+  for (const { anchor, content, language } of resolveOverlaps(anchored)) {
     if (anchor.start > cursor) {
       segments.push({ text: passageText.slice(cursor, anchor.start) });
     }
@@ -26,6 +26,7 @@ export function segmentPassage(
     segments.push({
       text: passageText.slice(anchor.start, anchor.end),
       annotation: toAnnotation(content),
+      lang: language,
     });
 
     cursor = anchor.end;

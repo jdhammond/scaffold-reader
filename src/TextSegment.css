@@ -2,7 +2,7 @@
   position: relative;
 }
 
-.segment--annotated {
+.segment__trigger {
   background: var(--highlight);
   border-bottom: 2px dotted var(--highlight-border);
   border-radius: 3px;
@@ -16,7 +16,7 @@
 }
 
 .segment__tooltip {
-  display: none;
+  display: block;
   position: absolute;
   bottom: calc(100% + 6px);
   left: 50%;
@@ -31,9 +31,9 @@
   font-size: 0.85rem;
   line-height: 1.4;
   box-shadow: 0 4px 12px rgb(15 23 42 / 0.18);
+
+  &[hidden] {
+    display: none;
+  }
 }
 
-.segment--annotated:hover .segment__tooltip,
-.segment--annotated:focus .segment__tooltip {
-  display: block;
-}

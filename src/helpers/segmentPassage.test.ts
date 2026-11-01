@@ -28,6 +28,19 @@ describe('segmentPassage', () => {
     });
   });
 
+  it('passes a translation\'s language through as lang', () => {
+    const scaffold = makeAnchored(10, 15, {
+      type: 'translation',
+      language: 'es',
+      content: { text: 'marrón' },
+    });
+    expect(segmentPassage([scaffold], passage)).toContainEqual({
+      text: 'brown',
+      annotation: 'marrón',
+      lang: 'es',
+    });
+  });
+
   it('adds no empty segments for spans at the start and end', () => {
     const segments = segmentPassage(
       [makeAnchored(0, 3), makeAnchored(16, 20)],
