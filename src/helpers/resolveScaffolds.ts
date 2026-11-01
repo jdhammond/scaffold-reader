@@ -11,7 +11,7 @@ export function resolveScaffolds(
 
     const { quote } = scaffold.anchor;
     // Annotate the first instance.
-    // TODO: Address case sensitivity in notes, and why case insensitive is right
+    // TODO: Address case sensitivity in notes
     const start = passageText.indexOf(quote);
     if (start === -1) {
       // TODO: stub a logging utility if time permits

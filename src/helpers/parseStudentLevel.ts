@@ -10,11 +10,17 @@ const qualitativeLevelMap: Record<string, number> = {
 export function parseStudentLevel(level: string | number) {
   if (typeof level === 'number') {
     return level;
-  } else {
-    if (level.toLowerCase() in qualitativeLevelMap) {
-      return qualitativeLevelMap[level.toLowerCase()];
-    }
   }
+
+  const numericLevel = Number(level);
+  if (level.trim() !== '' && Number.isFinite(numericLevel)) {
+    return numericLevel;
+  }
+
+  if (level.toLowerCase() in qualitativeLevelMap) {
+    return qualitativeLevelMap[level.toLowerCase()];
+  }
+
   // Ideally, our logging utility would notify the teacher such that they could confirm the learner's actual level and avoid the problem in the future.
   console.warn(
     'Could not parse student level. Returning maximum number of supports.',
