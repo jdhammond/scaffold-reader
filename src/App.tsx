@@ -7,16 +7,17 @@ import type { Student } from './types';
 import { TextSegment } from './TextSegment';
 import { getStudentScaffolds } from './helpers/getStudentScaffolds';
 import { segmentPassage } from './helpers/segmentPassage';
+import { groupParagraphs } from './helpers/groupParagraphs';
 
 function App() {
   const { passage, students, scaffolds } = data;
 
   const [activeStudent, setActiveStudent] = useState<Student>(students[0]);
 
-  const segments = useMemo(() => {
+  const paragraphs = useMemo(() => {
     const studentScaffolds = getStudentScaffolds(activeStudent, scaffolds);
     const resolvedScaffolds = resolveScaffolds(studentScaffolds, passage.text);
-    return segmentPassage(resolvedScaffolds, passage.text);
+    return groupParagraphs(segmentPassage(resolvedScaffolds, passage.text));
   }, [activeStudent, scaffolds, passage.text]);
 
   return (
@@ -29,11 +30,15 @@ function App() {
           onStudentChange={setActiveStudent}
         />
       </header>
-      <p className='passage'>
-        {segments.map((segment, i) => (
-          <TextSegment key={i} {...segment} />
+      <div className='passage'>
+        {paragraphs.map((paragraph, i) => (
+          <p key={i}>
+            {paragraph.map((segment, j) => (
+              <TextSegment key={j} {...segment} />
+            ))}
+          </p>
         ))}
-      </p>
+      </div>
     </>
   );
 }
