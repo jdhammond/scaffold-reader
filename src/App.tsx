@@ -6,13 +6,17 @@ import data from '../data-source/scaffold-reader-data.json';
 import { StudentSelector } from './StudentSelector';
 import type { Student } from './types';
 import { TextSegment } from './TextSegment';
+import { getStudentScaffolds } from './helpers/getStudentScaffolds';
 
 function App() {
-  const { passage, students, scaffolds } = data;
+  const { passage, students } = data;
 
   const [activeStudent, setActiveStudent] = useState<Student>(students[0]);
 
-  const segments = useMemo(() => resolveScaffolds(scaffolds), [activeStudent]);
+  const segments = useMemo(() => {
+    const studentScaffolds = getStudentScaffolds(activeStudent);
+    return resolveScaffolds(studentScaffolds);
+  }, [activeStudent]);
 
   return (
     <>
