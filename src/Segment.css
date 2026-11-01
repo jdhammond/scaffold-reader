@@ -1,0 +1,30 @@
+.segment {
+  position: relative;
+}
+
+.segment--annotated {
+  text-decoration: underline dotted;
+  cursor: help;
+}
+
+.segment__tooltip {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  width: max-content;
+  max-width: 240px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #222;
+  color: #fff;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.segment--annotated:hover .segment__tooltip,
+.segment--annotated:focus .segment__tooltip {
+  display: block;
+}

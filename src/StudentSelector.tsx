@@ -6,7 +6,7 @@ type StudentSelectorProps = {
   onStudentChange: (student: Student) => void;
 };
 
-function StudentSelector({
+export function StudentSelector({
   students,
   activeStudent,
   onStudentChange,
@@ -33,5 +33,3 @@ function StudentSelector({
     </>
   );
 }
-
-export default StudentSelector;
