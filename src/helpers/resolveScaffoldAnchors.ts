@@ -2,7 +2,7 @@ import type { Scaffold } from '../types';
 
 // Converts quote anchors into start/end indices within the passage.
 // Scaffolds whose quote isn't found keep their quote anchor.
-export function resolveScaffolds(
+export function resolveScaffoldAnchors(
   scaffolds: Scaffold[],
   passageText: string,
 ): Scaffold[] {
@@ -11,7 +11,6 @@ export function resolveScaffolds(
 
     const { quote } = scaffold.anchor;
     // Annotate the first instance.
-    // TODO: Address case sensitivity in notes
     const start = passageText.indexOf(quote);
     if (start === -1) {
       // TODO: stub a logging utility if time permits

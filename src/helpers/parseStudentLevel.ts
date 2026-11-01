@@ -1,10 +1,11 @@
-// 'Expanding' in the source data suggests qualitative rubric language.
-// This would presumably correspond to a numerical value, but with only one data point, it's hard to infer with confidence.
+// Presumable WIDA proficiency
 const qualitativeLevelMap: Record<string, number> = {
-  // exploring: 3
+  entering: 1,
+  emerging: 2,
+  developing: 3,
   expanding: 4,
-  // achieving: 5
-  // excelling: 6
+  bridging: 5,
+  reaching: 6,
 };
 
 export function parseStudentLevel(level: string | number) {

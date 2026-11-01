@@ -5,8 +5,8 @@ function toAnnotation(content: Scaffold['content']): string {
   return 'definition' in content ? content.definition : content.text;
 }
 
-// Expects scaffolds already run through resolveScaffolds; any that still have a
-// quote anchor (not found in the passage) are skipped.
+// Expects scaffolds already run through resolveScaffoldAnchors; any that still
+// have a quote anchor (not found in the passage) are skipped.
 export function segmentPassage(
   scaffolds: Scaffold[],
   passageText: string,

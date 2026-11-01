@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { resolveScaffolds } from './helpers/resolveScaffolds';
+import { resolveScaffoldAnchors } from './helpers/resolveScaffoldAnchors';
 
 import data from '../data-source/scaffold-reader-data.json';
 import { StudentSelector } from './StudentSelector';
@@ -16,7 +16,10 @@ function App() {
 
   const paragraphs = useMemo(() => {
     const studentScaffolds = getStudentScaffolds(activeStudent, scaffolds);
-    const resolvedScaffolds = resolveScaffolds(studentScaffolds, passage.text);
+    const resolvedScaffolds = resolveScaffoldAnchors(
+      studentScaffolds,
+      passage.text,
+    );
     return groupParagraphs(segmentPassage(resolvedScaffolds, passage.text));
   }, [activeStudent, scaffolds, passage.text]);
 

@@ -1,16 +1,16 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { resolveScaffolds } from './resolveScaffolds';
+import { resolveScaffoldAnchors } from './resolveScaffoldAnchors';
 import { makeScaffold } from '../test/makeScaffold';
 
 const passage = 'The cat sat. The cat slept.';
 
-describe('resolveScaffolds', () => {
+describe('resolveScaffoldAnchors', () => {
   afterEach(() => {
     vi.restoreAllMocks();
   });
 
   it('converts a quote anchor to the indices of its first occurrence', () => {
-    const [resolved] = resolveScaffolds(
+    const [resolved] = resolveScaffoldAnchors(
       [makeScaffold({ anchor: { quote: 'cat' } })],
       passage,
     );
@@ -18,7 +18,7 @@ describe('resolveScaffolds', () => {
   });
 
   it('matches case-sensitively, since capitalization can change meaning', () => {
-    const [resolved] = resolveScaffolds(
+    const [resolved] = resolveScaffoldAnchors(
       [makeScaffold({ anchor: { quote: 'mercury' } })],
       'Mercury orbits the sun. Old thermometers held mercury.',
     );
@@ -27,13 +27,13 @@ describe('resolveScaffolds', () => {
 
   it('leaves index anchors untouched', () => {
     const scaffold = makeScaffold({ anchor: { start: 13, end: 16 } });
-    expect(resolveScaffolds([scaffold], passage)).toEqual([scaffold]);
+    expect(resolveScaffoldAnchors([scaffold], passage)).toEqual([scaffold]);
   });
 
   it('keeps the quote anchor and warns when the quote is missing', () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     const scaffold = makeScaffold({ anchor: { quote: 'dog' } });
-    expect(resolveScaffolds([scaffold], passage)).toEqual([scaffold]);
+    expect(resolveScaffoldAnchors([scaffold], passage)).toEqual([scaffold]);
     expect(warn).toHaveBeenCalledOnce();
   });
 });
