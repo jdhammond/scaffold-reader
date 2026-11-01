@@ -7,13 +7,17 @@ const languageToAbbreviationsMap: Record<string, string[]> = {
   // Etc.
 };
 
-export function matchStudentLanguage(language: string, scaffold: Scaffold) {
+export function matchStudentLanguage(
+  language: string,
+  scaffold: Scaffold,
+): boolean {
   // Non-translation scaffolds shouldn't rejected on the basis of language
   if (!scaffold.language) return true;
 
   if (language.toLowerCase() in languageToAbbreviationsMap) {
     const targetAbbreviations =
       languageToAbbreviationsMap[language.toLowerCase()];
-    return scaffold.language in targetAbbreviations;
+    return targetAbbreviations.includes(scaffold.language);
   }
+  return false;
 }

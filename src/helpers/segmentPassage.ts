@@ -1,5 +1,4 @@
 import type { AnchoredScaffold, Scaffold, TextSegmentProps } from '../types';
-import data from '../../data-source/scaffold-reader-data.json';
 import { resolveOverlaps } from './resolveOverlaps';
 
 function toAnnotation(content: Scaffold['content']): string {
@@ -8,9 +7,10 @@ function toAnnotation(content: Scaffold['content']): string {
 
 // Expects scaffolds already run through resolveScaffolds; any that still have a
 // quote anchor (not found in the passage) are skipped.
-export function segmentPassage(scaffolds: Scaffold[]): TextSegmentProps[] {
-  const passageText = data.passage.text;
-
+export function segmentPassage(
+  scaffolds: Scaffold[],
+  passageText: string,
+): TextSegmentProps[] {
   const anchored = scaffolds.filter(
     (s): s is AnchoredScaffold => 'start' in s.anchor,
   );

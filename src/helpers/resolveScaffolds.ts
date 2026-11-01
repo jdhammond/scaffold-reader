@@ -1,11 +1,12 @@
-import type { Scaffold, TextSegmentProps } from '../types';
-import data from '../../data-source/scaffold-reader-data.json';
-import { segmentPassage } from './segmentPassage';
+import type { Scaffold } from '../types';
 
-export function resolveScaffolds(scaffolds: Scaffold[]): TextSegmentProps[] {
-  const passageText = data.passage.text;
-
-  const indexedScaffolds = scaffolds.map((scaffold) => {
+// Converts quote anchors into start/end indices within the passage.
+// Scaffolds whose quote isn't found keep their quote anchor.
+export function resolveScaffolds(
+  scaffolds: Scaffold[],
+  passageText: string,
+): Scaffold[] {
+  return scaffolds.map((scaffold) => {
     if (!('quote' in scaffold.anchor)) return scaffold;
 
     const { quote } = scaffold.anchor;
@@ -22,6 +23,4 @@ export function resolveScaffolds(scaffolds: Scaffold[]): TextSegmentProps[] {
 
     return { ...scaffold, anchor: { start, end: start + quote.length } };
   });
-
-  return segmentPassage(indexedScaffolds);
 }

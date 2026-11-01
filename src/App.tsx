@@ -7,16 +7,18 @@ import { StudentSelector } from './StudentSelector';
 import type { Student } from './types';
 import { TextSegment } from './TextSegment';
 import { getStudentScaffolds } from './helpers/getStudentScaffolds';
+import { segmentPassage } from './helpers/segmentPassage';
 
 function App() {
-  const { passage, students } = data;
+  const { passage, students, scaffolds } = data;
 
   const [activeStudent, setActiveStudent] = useState<Student>(students[0]);
 
   const segments = useMemo(() => {
-    const studentScaffolds = getStudentScaffolds(activeStudent);
-    return resolveScaffolds(studentScaffolds);
-  }, [activeStudent]);
+    const studentScaffolds = getStudentScaffolds(activeStudent, scaffolds);
+    const resolvedScaffolds = resolveScaffolds(studentScaffolds, passage.text);
+    return segmentPassage(resolvedScaffolds, passage.text);
+  }, [activeStudent, scaffolds, passage.text]);
 
   return (
     <>
