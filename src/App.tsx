@@ -1,4 +1,3 @@
-import './App.css';
 import { useState, useMemo } from 'react';
 import { resolveScaffolds } from './helpers/resolveScaffolds';
 
